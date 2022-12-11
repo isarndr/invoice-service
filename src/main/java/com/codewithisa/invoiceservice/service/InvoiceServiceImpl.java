@@ -21,10 +21,10 @@ public class InvoiceServiceImpl implements InvoiceService{
     public void pesanTiket(Long scheduleId, String nomorKursi) {
         log.info("Inside pesanTiket of SeatServiceImpl");
         Seats seatsList = restTemplate.getForObject(
-                "https://seat-service-production.up.railway.app/seats/find-seat-by-schedule-id-and-nomor-kursi/?scheduleId=" + scheduleId +
+                "https://seat-service-production-3b8e.up.railway.app/seats/find-seat-by-schedule-id-and-nomor-kursi/?scheduleId=" + scheduleId +
                         "&nomorKursi=" + nomorKursi,
                 Seats.class);
-        restTemplate.delete("https://seat-service-production.up.railway.app/seats/delete-seat-by-schedule-id-and-nomor-kursi/?scheduleId=" + scheduleId + "&nomorKursi=" + nomorKursi);
+        restTemplate.delete("https://seat-service-production-3b8e.up.railway.app/seats/delete-seat-by-schedule-id-and-nomor-kursi/?scheduleId=" + scheduleId + "&nomorKursi=" + nomorKursi);
         log.info("seat successfully ordered");
     }
 }

@@ -105,7 +105,7 @@ public class InvoiceController {
 
         try {
             schedules=restTemplate.getForObject(
-                    "https://schedule-service-production.up.railway.app/schedules/find-schedule-by-all/?jamMulai=" +
+                    "https://schedule-service-production-12cd.up.railway.app/schedules/find-schedule-by-all/?jamMulai=" +
                             jamMulai + "&studioName=" + studioName + "&tanggalTayang=" + tanggalTayang + "&filmCode="
                     + filmCode,
                     Schedules.class
@@ -126,7 +126,7 @@ public class InvoiceController {
         Seats seat=null;
         try {
             seat=restTemplate.getForObject(
-                "https://seat-service-production.up.railway.app/seats/find-seat-by-schedule-id-and-nomor-kursi/?scheduleId="+scheduleId+
+                "https://seat-service-production-3b8e.up.railway.app/seats/find-seat-by-schedule-id-and-nomor-kursi/?scheduleId="+scheduleId+
                         "&nomorKursi="+nomorKursi,
                     Seats.class
             );
