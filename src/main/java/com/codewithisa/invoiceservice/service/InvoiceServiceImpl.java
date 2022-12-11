@@ -16,10 +16,6 @@ import java.util.List;
 public class InvoiceServiceImpl implements InvoiceService{
     @Autowired
     RestTemplate restTemplate;
-    @Override
-    public void generateInvoice() {
-
-    }
 
     @Override
     public void pesanTiket(Long scheduleId, String nomorKursi) {

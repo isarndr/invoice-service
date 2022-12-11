@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Tiket_Bioskop" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8b0cdd2e-bab2-410e-a824-5d5875281715">
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <field name="filmName" class="java.lang.String"/>
+    <field name="tanggalTayang" class="java.lang.String"/>
+    <field name="jamMulai" class="java.lang.String"/>
+    <field name="nomorKursi" class="java.lang.String"/>
+    <field name="username" class="java.lang.String"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="115" splitType="Stretch">
+            <staticText>
+                <reportElement x="189" y="16" width="424" height="86" uuid="c14c4517-0d66-4938-b407-6e9a8418a870"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="26"/>
+                </textElement>
+                <text><![CDATA[Tiket Bioskop]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="118" splitType="Stretch">
+            <textField>
+                <reportElement x="400" y="40" width="400" height="43" uuid="13c6c401-60fa-4bdf-b71f-cced304b15f4"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="26"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{filmName}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="38" width="400" height="45" uuid="e5297525-bedd-4609-a62d-29eff76afa1b"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="26"/>
+                </textElement>
+                <text><![CDATA[Nama film: ]]></text>
+            </staticText>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="150" splitType="Stretch">
+            <staticText>
+                <reportElement x="10" y="0" width="390" height="30" uuid="aea2f233-cb02-4df0-ab20-c52215ae24fb"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="20"/>
+                </textElement>
+                <text><![CDATA[Tanggal tayang: ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="400" y="0" width="400" height="30" uuid="e5a8100e-277e-4935-8948-71c1bc93eb75"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="20"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{tanggalTayang}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="10" y="30" width="390" height="30" uuid="b3534ad1-6185-4bd2-8d68-b241afa887c2"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="20"/>
+                </textElement>
+                <text><![CDATA[Jam mulai: ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="400" y="30" width="400" height="30" uuid="7fca7772-d7d5-42d7-b3c8-faaba850fbfe"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="20"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{jamMulai}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="10" y="60" width="390" height="30" uuid="c33bd720-a7fd-489c-bf8e-da9e2c2ea63e"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="20"/>
+                </textElement>
+                <text><![CDATA[Nomor kursi: ]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="400" y="60" width="400" height="30" uuid="947559cd-2202-4001-b693-c0ffb0556d97"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="20"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{nomorKursi}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="400" y="91" width="400" height="30" uuid="a95d3a1e-7e53-4f2d-9ab0-4902de100881"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="20"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="10" y="91" width="390" height="30" uuid="f8136fdf-4319-4a27-ac7c-f6ad07256c2f"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="20"/>
+                </textElement>
+                <text><![CDATA[username: ]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="21" splitType="Stretch"/>
+    </detail>
+    <columnFooter>
+        <band height="14" splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="19" splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="10" splitType="Stretch"/>
+    </summary>
+</jasperReport>
