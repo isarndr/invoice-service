@@ -37,7 +37,7 @@ public class InvoiceController {
     @Autowired
     RestTemplate restTemplate;
 
-    @PostMapping("/pesan-tiket")
+//    @PostMapping("/pesan-tiket")
     public ResponseEntity<String> pesanTiket(@RequestParam("scheduleId") Long scheduleId,
                                              @RequestParam("nomorKursi") String nomorKursi){
         log.info("Inside pesanTiket of InvoiceController");
@@ -62,7 +62,7 @@ public class InvoiceController {
         Users user=null;
         try {
             user=restTemplate.getForObject(
-                    "http://localhost:9001/users/username/" + username,
+                    "http://localhost:9001/users/get-user-by-username/" + username,
                     Users.class
             );
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class InvoiceController {
         Films film = null;
         try {
             film = restTemplate.getForObject(
-                    "http://localhost:9002/films/film-name/" + filmName, Films.class);
+                    "http://localhost:9002/films/find-film-by-film-name/" + filmName, Films.class);
             filmCode=film.getFilmCode();
         } catch (Exception e) {
 
@@ -105,7 +105,7 @@ public class InvoiceController {
 
         try {
             schedules=restTemplate.getForObject(
-                    "http://localhost:9003/schedules/schedule-by-all/?jamMulai=" +
+                    "http://localhost:9003/schedules/find-schedule-by-all/?jamMulai=" +
                             jamMulai + "&studioName=" + studioName + "&tanggalTayang=" + tanggalTayang + "&filmCode="
                     + filmCode,
                     Schedules.class
@@ -126,7 +126,7 @@ public class InvoiceController {
         Seats seat=null;
         try {
             seat=restTemplate.getForObject(
-                "http://localhost:9004/seats/by-schedule-id-and-nomor-kursi/?scheduleId="+scheduleId+
+                "http://localhost:9004/seats/find-seat-by-schedule-id-and-nomor-kursi/?scheduleId="+scheduleId+
                         "&nomorKursi="+nomorKursi,
                     Seats.class
             );

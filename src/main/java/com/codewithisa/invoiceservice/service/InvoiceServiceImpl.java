@@ -21,10 +21,10 @@ public class InvoiceServiceImpl implements InvoiceService{
     public void pesanTiket(Long scheduleId, String nomorKursi) {
         log.info("Inside pesanTiket of SeatServiceImpl");
         Seats seatsList = restTemplate.getForObject(
-                "http://localhost:9004/seats/by-schedule-id-and-nomor-kursi/?scheduleId=" + scheduleId +
+                "http://localhost:9004/seats/find-seat-by-schedule-id-and-nomor-kursi/?scheduleId=" + scheduleId +
                         "&nomorKursi=" + nomorKursi,
                 Seats.class);
-        restTemplate.delete("http://localhost:9004/seats/delete-seat?scheduleId=" + scheduleId + "&nomorKursi=" + nomorKursi);
+        restTemplate.delete("http://localhost:9004/seats/delete-seat-by-schedule-id-and-nomor-kursi/?scheduleId=" + scheduleId + "&nomorKursi=" + nomorKursi);
         log.info("seat successfully ordered");
     }
 }
