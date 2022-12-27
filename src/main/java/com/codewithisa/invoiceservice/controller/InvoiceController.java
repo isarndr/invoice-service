@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
@@ -31,10 +32,24 @@ import java.util.Map;
 @RestController
 @RequestMapping("/invoice")
 public class InvoiceController {
+
     @Autowired
     InvoiceService invoiceService;
+
     @Autowired
     RestTemplate restTemplate;
+
+    @Value("${getUserByUsername}")
+    private String getUserByUsername;
+
+    @Value("${getFilmByFilmName}")
+    private String getFilmByFilmName;
+
+    @Value("${getScheduleByAll}")
+    private String getScheduleByAll;
+
+    @Value("${getSeatByScheduleIdAndNomorKursi}")
+    private String getSeatByScheduleIdAndNomorKursi;
 
 //    @PostMapping("/pesan-tiket")
     public ResponseEntity<String> pesanTiket(@RequestParam("scheduleId") Long scheduleId,
@@ -58,10 +73,7 @@ public class InvoiceController {
         // cek username
         User user=null;
         try {
-            user=restTemplate.getForObject(
-                    "http://localhost:9001/user?username=" + username,
-                    User.class
-            );
+            user=restTemplate.getForObject(getUserByUsername + username, User.class);
         } catch (Exception e) {
 
         }
@@ -78,8 +90,7 @@ public class InvoiceController {
         Long filmCode=null;
         Film film = null;
         try {
-            film = restTemplate.getForObject(
-                    "http://localhost:9002/film/by-film-name/" + filmName, Film.class);
+            film = restTemplate.getForObject(getFilmByFilmName + filmName, Film.class);
             filmCode=film.getFilmCode();
         } catch (Exception e) {
 
@@ -102,10 +113,8 @@ public class InvoiceController {
 
         try {
             schedule =restTemplate.getForObject(
-                    "http://localhost:9003/schedule/by-all/?jamMulai=" +
-                            jamMulai + "&studioName=" + studioName + "&tanggalTayang=" + tanggalTayang + "&filmCode="
-                    + filmCode,
-                    Schedule.class
+                    getScheduleByAll + jamMulai + "&studioName="
+                            + studioName + "&tanggalTayang=" + tanggalTayang + "&filmCode=" + filmCode, Schedule.class
             );
         } catch (Exception e) {
 
@@ -123,9 +132,7 @@ public class InvoiceController {
         Seat seat=null;
         try {
             seat=restTemplate.getForObject(
-                "http://localhost:9004/seat/by-schedule-id-and-nomor-kursi/?scheduleId="+scheduleId+
-                        "&nomorKursi="+nomorKursi,
-                    Seat.class
+                getSeatByScheduleIdAndNomorKursi +scheduleId+ "&nomorKursi="+nomorKursi, Seat.class
             );
         } catch (Exception e) {
 
