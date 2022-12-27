@@ -6,13 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Films {
+public class Film {
 
     @Schema(example = "1")
     private Long filmCode;

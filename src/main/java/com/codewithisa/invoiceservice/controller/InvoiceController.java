@@ -1,13 +1,12 @@
 package com.codewithisa.invoiceservice.controller;
 
-import com.codewithisa.invoiceservice.VO.Films;
-import com.codewithisa.invoiceservice.VO.Schedules;
-import com.codewithisa.invoiceservice.VO.Seats;
-import com.codewithisa.invoiceservice.VO.Users;
+import com.codewithisa.invoiceservice.VO.Film;
+import com.codewithisa.invoiceservice.VO.Schedule;
+import com.codewithisa.invoiceservice.VO.Seat;
+import com.codewithisa.invoiceservice.VO.User;
 import com.codewithisa.invoiceservice.service.InvoiceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -40,7 +39,6 @@ public class InvoiceController {
 //    @PostMapping("/pesan-tiket")
     public ResponseEntity<String> pesanTiket(@RequestParam("scheduleId") Long scheduleId,
                                              @RequestParam("nomorKursi") String nomorKursi){
-        log.info("Inside pesanTiket of InvoiceController");
         invoiceService.pesanTiket(scheduleId, nomorKursi);
         return new ResponseEntity<>("Tiket berhasil dipesan", HttpStatus.OK);
     }
@@ -57,13 +55,12 @@ public class InvoiceController {
                               @Schema(example = "A3") @RequestParam("nomorKursi") String nomorKursi,
                               @Schema(example = "isarndr") @RequestParam("username") String username)
             throws IOException {
-        log.info("Inside generateTiket of InvoiceController");
         // cek username
-        Users user=null;
+        User user=null;
         try {
             user=restTemplate.getForObject(
-                    "https://user-service-production-6fa9.up.railway.app/users/get-user-by-username/" + username,
-                    Users.class
+                    "http://localhost:9001/user?username=" + username,
+                    User.class
             );
         } catch (Exception e) {
 
@@ -79,10 +76,10 @@ public class InvoiceController {
 
         // ambil filmCode dari input filmName
         Long filmCode=null;
-        Films film = null;
+        Film film = null;
         try {
             film = restTemplate.getForObject(
-                    "https://film-service-production.up.railway.app/films/find-film-by-film-name/" + filmName, Films.class);
+                    "http://localhost:9002/film/by-film-name/" + filmName, Film.class);
             filmCode=film.getFilmCode();
         } catch (Exception e) {
 
@@ -100,20 +97,20 @@ public class InvoiceController {
             return;
         }
 
-        // find schedules berdasarkan kriteria input endpoint
-        Schedules schedules = null;
+        // find schedule berdasarkan kriteria input endpoint
+        Schedule schedule = null;
 
         try {
-            schedules=restTemplate.getForObject(
-                    "https://schedule-service-production-12cd.up.railway.app/schedules/find-schedule-by-all/?jamMulai=" +
+            schedule =restTemplate.getForObject(
+                    "http://localhost:9003/schedule/by-all/?jamMulai=" +
                             jamMulai + "&studioName=" + studioName + "&tanggalTayang=" + tanggalTayang + "&filmCode="
                     + filmCode,
-                    Schedules.class
+                    Schedule.class
             );
         } catch (Exception e) {
 
         }
-        if(schedules== null){
+        if(schedule == null){
             log.error("Schedule doesn't exist");
             response.sendError(HttpStatus.BAD_REQUEST.value());
             return;
@@ -121,14 +118,14 @@ public class InvoiceController {
 
         // pesanTiket preparation
 
-        Long scheduleId = schedules.getScheduleId();
+        Long scheduleId = schedule.getScheduleId();
 
-        Seats seat=null;
+        Seat seat=null;
         try {
             seat=restTemplate.getForObject(
-                "https://seat-service-production-3b8e.up.railway.app/seats/find-seat-by-schedule-id-and-nomor-kursi/?scheduleId="+scheduleId+
+                "http://localhost:9004/seat/by-schedule-id-and-nomor-kursi/?scheduleId="+scheduleId+
                         "&nomorKursi="+nomorKursi,
-                    Seats.class
+                    Seat.class
             );
         } catch (Exception e) {
 
@@ -168,7 +165,6 @@ public class InvoiceController {
             response.setContentType("application/pdf");
             response.addHeader("Content-Disposition", "inline; filename=tiket.pdf;");
 
-            log.info("Seat successfully ordered");
             JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
 
 

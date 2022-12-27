@@ -6,15 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Schedules {
+public class Schedule {
 
     @Schema(example = "1")
     private Long scheduleId;

@@ -5,15 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 
 @Data
 @Builder
 @AllArgsConstructor
-public class Users {
+public class User {
     @Schema(example = "1")
     private Long userId;
     @Schema(example = "isarndr")
@@ -23,19 +19,19 @@ public class Users {
     @Schema(example = "123")
     private String password;
 
-    public Users(Long id, String email, String password) {
+    public User(Long id, String email, String password) {
         this.userId = id;
         this.emailAddress = email;
         this.password = password;
     }
 
-    public Users(String username, String email, String password) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.emailAddress = email;
         this.password = password;
     }
 
-    public Users() {
+    public User() {
 
     }
 

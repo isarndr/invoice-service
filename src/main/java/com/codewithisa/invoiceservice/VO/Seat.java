@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Seats {
+public class Seat {
     private Character studioName;
     private String nomorKursi;
     private Long scheduleId;
